@@ -60,10 +60,6 @@ def main():
     }
     #演習2:爆弾を加速させる
     accs = [a for a in range(1, 11)] # 加速を管理するリスト
-    # 演習3:ゲームオーバーでこうかとんの画像を切り替える
-    G_done = True # ゲームが続いているフラグ
-    over_tmr = 3  # ゲームが終了した後のタイマー
-
 
     while True:
         txt = "0, 0"
@@ -71,7 +67,6 @@ def main():
             if event.type == pg.QUIT: 
                 return 0
         tmr += 1
-    
         # 爆弾移動処理
         bb_rct.move_ip(vx, vy)
         avx, avy = vx*accs[min(tmr//500, 9)], vy*accs[min(tmr//500, 9)]
@@ -92,7 +87,7 @@ def main():
                 if check_bound(kk_rct, scr_rct) != (True, True):
                     kk_rct.centerx -= tup[0]
                     kk_rct.centery -= tup[1]
-                    
+        accs = [a for a in range(1, 11)] # 加速を管理するリスト            
         # 移動している方向を確認する
         t_x = 0
         t_y = 0
