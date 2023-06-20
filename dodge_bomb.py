@@ -47,8 +47,11 @@ def main():
     tmr = 0
     while True:
         for event in pg.event.get():
-            if event.type == pg.QUIT: 
+            if event.type == pg.QUIT:
                 return
+        if kk_rct.colliderect(bd_rct): #練習5
+            print("ゲームオーバー")
+            return
         key_lst = pg.key.get_pressed()
         sum_mv = [0, 0]  # 合計移動量
         for k, mv in delta.items():
