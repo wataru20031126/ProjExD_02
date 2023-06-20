@@ -22,8 +22,6 @@ def main():
     kk_img = pg.image.load("ex02/fig/3.png")
     kk_img2 = pg.transform.flip(kk_img, True, False) #反転させたこうかとん
     kk_img2 = pg.transform.flip(kk_img, True, False) # 反転させたこうかとん
-    kk_img3 = pg.image.load("ex02/fig/8.png")
-    kk_img3 = pg.transform.rotozoom(kk_img3, 0, 2.0)
     tmr = 0
     # 練習1:半径10,色：赤の円で爆弾を作成する
     bb_img = pg.Surface((20, 20))  # ボムのサーフェイスを作成する
@@ -64,7 +62,7 @@ def main():
     accs = [a for a in range(1, 11)] # 加速を管理するリスト
     # 演習3:ゲームオーバーでこうかとんの画像を切り替える
     G_done = True # ゲームが続いているフラグ
-    over_tmr = 0  # ゲームが終了した後のタイマー
+    over_tmr = 3  # ゲームが終了した後のタイマー
 
 
     while True:
@@ -102,25 +100,16 @@ def main():
             t_x += t[0]
             t_y += t[1]
         kk_img = delta[(t_x, t_y)]
-        if kk_rct.colliderect(bb_rct):
-            G_done=False
-        if not G_done:
-            kk_img = kk_img3  # 画像を切り替える
-            over_tmr += 1  # 終了後の時間を進める
-
-        if over_tmr > 1000:
-            return  # 1秒経過で終わる
-
-  
 
 
         #　描画処理
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, kk_rct)
         screen.blit(bb_img, bb_rct) # 爆弾を描画する
-        
-       
 
+        # 練習5:衝突処理
+        if kk_rct.colliderect(bb_rct):
+            return
         pg.display.update()
         clock.tick(1000)
 if __name__ == "__main__":
